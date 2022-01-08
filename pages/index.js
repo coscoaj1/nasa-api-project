@@ -6,6 +6,7 @@ import moment from "moment";
 
 export default function Home() {
   const [images, setImages] = useState(null);
+  const [likeImage, setLikeImage] = useState(false);
   const [date, setDate] = useState(() => {
     let initialDate = new moment();
     return initialDate;
@@ -56,18 +57,64 @@ export default function Home() {
               />
             </div>
             <section className="max-w-xl p-4">
-              <h4 className="font-medium mr-4">
-                {images.title}
-                <span>
-                  <button
-                    className="text-lg ml-4 bg-blue-700 px-12 rounded-md"
-                    onClick={decrementDate}
+              <div className="flex justify-between">
+                <h4 className="font-medium">{images.title}</h4>
+                <button className="text-[#02bfe7]" onClick={decrementDate}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    {">"}
-                  </button>
-                </span>
-              </h4>{" "}
-              <h4 className="text-gray-400 font-semibold">{imageDate}</h4>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="flex gap-4 items-center">
+                <h4 className="text-[#aeb0b5] font-semibold py-2">
+                  {imageDate}
+                </h4>
+                <button
+                  className="h-8 w-8"
+                  onClick={() => setLikeImage(!likeImage)}
+                >
+                  {likeImage ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
               <p>{images.explanation}</p>
             </section>
           </div>
