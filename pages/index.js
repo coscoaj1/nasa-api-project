@@ -55,6 +55,7 @@ export default function Home() {
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center h-auto mt-2 rounded-md shadow-lg m-4">
               <Image
+                alt={images.title}
                 className="rounded-md p-4 "
                 width={500}
                 height={500}
