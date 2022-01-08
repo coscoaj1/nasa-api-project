@@ -6,7 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
 
-export default function Home({ data }) {
+export default function Home() {
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [likeImage, setLikeImage] = useState(false);
@@ -15,11 +15,11 @@ export default function Home({ data }) {
     return initialDate;
   });
 
+  //Used client side data fetching since SSG/SSR wasnt really feasible
+
   useEffect(() => {
     let formattedDate = date;
-    console.log(formattedDate);
     let formattedDateClone = formattedDate.clone().format("YYYY-MM-DD");
-    console.log(formattedDateClone);
 
     axios
       .get(
@@ -86,7 +86,7 @@ export default function Home({ data }) {
                 </button>
               </div>
               <div className="flex gap-4 items-center">
-                <h4 className="text-gray-400 font-semibold py-2">
+                <h4 className="text-gray-500 font-semibold py-2">
                   {imageDate}
                 </h4>
                 <LikeButton
