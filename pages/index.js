@@ -6,7 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
 
-export default function Home() {
+export default function Home({ data }) {
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [likeImage, setLikeImage] = useState(false);
@@ -27,6 +27,7 @@ export default function Home() {
       )
       .then(function (response) {
         setImages(response.data);
+        console.log(response.data);
         setTimeout(() => {
           setLoading(false);
         }, 1100);
@@ -42,14 +43,14 @@ export default function Home() {
   };
 
   if (images) {
-    const imageDate = moment(images.date).format("MM-D-YYYY");
+    const imageDate = moment(images.date).format("M-D-YYYY");
   }
 
   return (
     <div className="relative">
       {loading && <LoadingSpinner />}
       <Header />
-      <main className="h-auto w-screen relative font-Helvetica-Neue">
+      <main className="h-auto w-screen relative font-titilluum">
         {images ? (
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center h-auto mt-2 rounded-md shadow-lg m-4">
@@ -70,7 +71,7 @@ export default function Home() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className="h-8 w-8"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -85,7 +86,7 @@ export default function Home() {
                 </button>
               </div>
               <div className="flex gap-4 items-center">
-                <h4 className="text-[#aeb0b5] font-semibold py-2">
+                <h4 className="text-gray-400 font-semibold py-2">
                   {imageDate}
                 </h4>
                 <LikeButton

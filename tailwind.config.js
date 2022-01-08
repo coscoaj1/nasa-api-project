@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Titillium Web", ...defaultTheme.fontFamily.sans],
+        titilluum: ["Titillium Web"],
       },
     },
   },

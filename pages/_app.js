@@ -1,8 +1,15 @@
 import "../styles/globals.css";
-import Header from "../components/Header";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <title>UnSpace: A NASA Apod Image Gallery</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
