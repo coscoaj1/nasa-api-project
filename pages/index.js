@@ -3,9 +3,11 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Home() {
   const [images, setImages] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [likeImage, setLikeImage] = useState(false);
   const [date, setDate] = useState(() => {
     let initialDate = new moment();
@@ -24,6 +26,9 @@ export default function Home() {
       )
       .then(function (response) {
         setImages(response.data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1100);
       });
   }, [date]);
 
@@ -31,6 +36,8 @@ export default function Home() {
     let today = date;
     let todayClone = today.clone().subtract(1, "day");
     setDate(todayClone);
+    setLikeImage(false);
+    setLoading(true);
   };
 
   if (images) {
@@ -45,10 +52,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-row h-auto w-screen gap-10 ">
-        {images ? (
-          <div>
-            <div className="flex items-center justify-center w-full h-auto p-4 rounded-md">
+      <main className="h-auto w-screen relative">
+        {loading && <LoadingSpinner />}
+        {images && !loading ? (
+          <div className="flex flex-col items-center">
+            <div className="flex items-center justify-center w-screen h-auto p-4 rounded-md">
               <Image
                 className="rounded-md shadow-md"
                 width={400}
@@ -59,7 +67,11 @@ export default function Home() {
             <section className="max-w-xl p-4">
               <div className="flex justify-between">
                 <h4 className="font-medium">{images.title}</h4>
-                <button className="text-[#02bfe7]" onClick={decrementDate}>
+                <button
+                  className="text-[#aeb0b5]"
+                  onClick={decrementDate}
+                  title="next image"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -81,7 +93,8 @@ export default function Home() {
                   {imageDate}
                 </h4>
                 <button
-                  className="h-8 w-8"
+                  className="h-8 w-8 text-[#02bfe7]"
+                  title="like"
                   onClick={() => setLikeImage(!likeImage)}
                 >
                   {likeImage ? (
