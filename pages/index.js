@@ -5,6 +5,8 @@ import moment from "moment";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
+import noVideo from "../public/assets/no_video.webp";
+import DecrementButton from "../components/DecrementButton";
 
 export default function Home() {
   const [images, setImages] = useState(null);
@@ -15,7 +17,7 @@ export default function Home() {
     return initialDate;
   });
 
-  //Used client side data fetching since SSG/SSR wasnt really feasible
+  //Used client side data fetching since SSG/SSR wasnt really feasible here
 
   useEffect(() => {
     let formattedDate = date;
@@ -29,7 +31,19 @@ export default function Home() {
         setImages(response.data);
         setTimeout(() => {
           setLoading(false);
-        }, 1100);
+        }, 900);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
       });
   }, [date]);
 
@@ -50,7 +64,7 @@ export default function Home() {
       {loading && <LoadingSpinner />}
       <Header />
       <main className="h-auto w-screen relative font-titilluum">
-        {images ? (
+        {images && (
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center h-auto mt-2 rounded-md shadow-lg m-4">
               <Image
@@ -58,32 +72,13 @@ export default function Home() {
                 className="rounded-md p-4 "
                 width={500}
                 height={500}
-                src={images.url}
+                src={images.media_type === "image" ? images.url : noVideo}
               />
             </div>
             <section className="max-w-xl p-4">
               <div className="flex justify-between">
                 <h4 className="font-[700] text-xl">{images.title}</h4>
-                <button
-                  className="text-[#aeb0b5]"
-                  onClick={decrementDate}
-                  title="next image"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
+                <DecrementButton decrementDate={decrementDate} />
               </div>
               <div className="flex gap-4 items-center">
                 <h4 className="text-gray-500 font-semibold py-2">
@@ -97,7 +92,7 @@ export default function Home() {
               <p>{images.explanation}</p>
             </section>
           </div>
-        ) : null}
+        )}
       </main>
     </div>
   );
