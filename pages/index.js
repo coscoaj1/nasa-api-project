@@ -25,9 +25,8 @@ export default function Home() {
       .get(
         `https://api.nasa.gov/planetary/apod?date=${formattedDateClone}&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`
       )
-      .then(function (response) {
+      .then((response) => {
         setImages(response.data);
-        console.log(response.data);
         setTimeout(() => {
           setLoading(false);
         }, 1100);
