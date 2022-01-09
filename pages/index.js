@@ -11,6 +11,7 @@ import DecrementButton from "../components/DecrementButton";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [likeImage, setLikeImage] = useState(false);
@@ -19,7 +20,7 @@ export default function Home() {
     return initialDate;
   });
 
-  //Used client side data fetching since SSG/SSR wasnt really feasible here
+  //Used client side data fetching since the image changes daily.
 
   useEffect(() => {
     let formattedDate = date;
@@ -64,11 +65,17 @@ export default function Home() {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  // To avoid hydration mismatch errors, since it's impossible to know the theme
+  // on the server
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   return (
-    <div className="relative dark:bg-[#323a45] bg-[#d6d7d9] transition duration-500 ease-in-out">
+    <div className="relative dark:bg-[#111827] bg-[#d6d7d9] transition duration-500 ease-in-out">
       {loading && <LoadingSpinner />}
       <Header theme={theme} toggleTheme={toggleTheme} />
-      <main className="relative w-screen h-auto font-titilluum">
+      <main className="relative w-full h-auto font-titilluum">
         {images && (
           <div className="flex flex-col items-center">
             <div className="flex items-center justify-center h-auto m-4 mt-2 rounded-md shadow-lg">
@@ -86,7 +93,7 @@ export default function Home() {
                 <DecrementButton decrementDate={decrementDate} />
               </div>
               <div className="flex items-center gap-4">
-                <h4 className="dark:text-gray-200 text-gray-500[600] py-2">
+                <h4 className="dark:text-gray-300 text-gray-500 font-[600] py-2">
                   {imageDate}
                 </h4>
                 <LikeButton
@@ -94,7 +101,7 @@ export default function Home() {
                   setLikeImage={() => setLikeImage(!likeImage)}
                 />
               </div>
-              <p className="text-gray-600 dark:text-gray-100 font-[400]">
+              <p className="text-gray-600 dark:text-gray-100 text-lg font-[400]">
                 {images.explanation}
               </p>
             </section>

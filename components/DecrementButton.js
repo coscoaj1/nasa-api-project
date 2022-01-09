@@ -3,13 +3,13 @@ import React from "react";
 export default function DecrementButton({ decrementDate }) {
   return (
     <button
-      className="text-[#aeb0b5]"
+      className="text-gray-600 dark:text-gray-300"
       onClick={decrementDate}
       title="next image"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-8 w-8"
+        className="w-8 h-8"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
