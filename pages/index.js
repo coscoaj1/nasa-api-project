@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
@@ -9,6 +10,7 @@ import noVideo from "../public/assets/no_video.webp";
 import DecrementButton from "../components/DecrementButton";
 
 export default function Home() {
+  const { theme, setTheme } = useTheme();
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [likeImage, setLikeImage] = useState(false);
@@ -59,17 +61,20 @@ export default function Home() {
     const imageDate = moment(images.date).format("M-D-YYYY");
   }
 
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
   return (
-    <div className="relative">
+    <div className="relative dark:bg-[#323a45] bg-[#d6d7d9] transition duration-500 ease-in-out">
       {loading && <LoadingSpinner />}
-      <Header />
-      <main className="h-auto w-screen relative font-titilluum">
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <main className="relative w-screen h-auto font-titilluum">
         {images && (
           <div className="flex flex-col items-center">
-            <div className="flex items-center justify-center h-auto mt-2 rounded-md shadow-lg m-4">
+            <div className="flex items-center justify-center h-auto m-4 mt-2 rounded-md shadow-lg">
               <Image
                 alt={images.title}
-                className="rounded-md p-4 "
+                className="p-4 rounded-md "
                 width={500}
                 height={500}
                 src={images.media_type === "image" ? images.url : noVideo}
@@ -77,11 +82,11 @@ export default function Home() {
             </div>
             <section className="max-w-xl p-4">
               <div className="flex justify-between">
-                <h4 className="font-[700] text-xl">{images.title}</h4>
+                <h4 className="font-[700] text-2xl">{images.title}</h4>
                 <DecrementButton decrementDate={decrementDate} />
               </div>
-              <div className="flex gap-4 items-center">
-                <h4 className="text-gray-500 font-semibold py-2">
+              <div className="flex items-center gap-4">
+                <h4 className="dark:text-gray-200 text-gray-500[600] py-2">
                   {imageDate}
                 </h4>
                 <LikeButton
@@ -89,7 +94,9 @@ export default function Home() {
                   setLikeImage={() => setLikeImage(!likeImage)}
                 />
               </div>
-              <p>{images.explanation}</p>
+              <p className="text-gray-600 dark:text-gray-100 font-[400]">
+                {images.explanation}
+              </p>
             </section>
           </div>
         )}
