@@ -67,7 +67,8 @@ export default function Home() {
   };
 
   // To avoid hydration mismatch errors, since it's impossible to know the theme
-  // on the server
+  // on the server -->
+
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
@@ -101,7 +102,7 @@ export default function Home() {
                   setLikeImage={() => setLikeImage(!likeImage)}
                 />
               </div>
-              <p className="text-gray-900 dark:text-gray-200 text-lg font-[400]">
+              <p className="text-gray-900 dark:text-gray-300 text-lg font-[400]">
                 {images.explanation}
               </p>
             </section>
