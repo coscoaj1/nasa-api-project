@@ -4,7 +4,7 @@ import { HiSun } from "react-icons/hi";
 
 export default function Header({ theme, toggleTheme }) {
   return (
-    <nav className="relative flex w-full h-12 gap-4 dark:bg-[#212121] bg-white">
+    <nav className="relative flex w-full h-12 gap-2 dark:bg-[#212121] bg-white">
       <h1 className="text-lg font-[500]">UnSpace</h1>
       <button className="p-2 rounded-full" onClick={toggleTheme}>
         {theme === "dark" ? (
