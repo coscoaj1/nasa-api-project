@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
 import noVideo from "../public/assets/no_video.webp";
 import DecrementButton from "../components/DecrementButton";
+export const nasaUrl = "https://api.nasa.gov/planetary/apod?date=";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -21,17 +22,17 @@ export default function Home() {
   });
 
   //Used client side data fetching since the image changes daily.
-
   useEffect(() => {
     let formattedDate = date;
     let formattedDateClone = formattedDate.clone().format("YYYY-MM-DD");
 
     axios
       .get(
-        `https://api.nasa.gov/planetary/apod?date=${formattedDateClone}&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`
+        `${nasaUrl}${formattedDateClone}&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`
       )
       .then((response) => {
         setImages(response.data);
+        console.log(response.data);
         setTimeout(() => {
           setLoading(false);
         }, 900);
@@ -95,7 +96,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-4">
                 <h4 className="dark:text-gray-300 text-gray-500 font-[600] py-2">
-                  {imageDate}
+                  {/* {imageDate} */}
                 </h4>
                 <LikeButton
                   likeImage={likeImage}
