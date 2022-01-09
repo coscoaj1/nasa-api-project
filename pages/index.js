@@ -101,7 +101,7 @@ export default function Home() {
                   setLikeImage={() => setLikeImage(!likeImage)}
                 />
               </div>
-              <p className="text-gray-600 dark:text-gray-100 text-lg font-[400]">
+              <p className="text-gray-900 dark:text-gray-200 text-lg font-[400]">
                 {images.explanation}
               </p>
             </section>
