@@ -6,6 +6,7 @@ export default function DecrementButton({ decrementDate }) {
       className="text-gray-600 dark:text-gray-300"
       onClick={decrementDate}
       title="next image"
+      data-testid="decrement-button"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

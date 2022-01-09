@@ -1,11 +1,12 @@
 import React from "react";
 
-export default function LikeButton({ likeImage, setLikeImage }) {
+function LikeButton({ likeImage, setLikeImage }) {
   return (
     <button
       className="h-8 w-8 text-[#02bfe7]"
       title="like"
       onClick={setLikeImage}
+      data-testid="like-button"
     >
       {likeImage ? (
         <svg
@@ -39,3 +40,5 @@ export default function LikeButton({ likeImage, setLikeImage }) {
     </button>
   );
 }
+
+export default LikeButton;
