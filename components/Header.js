@@ -9,12 +9,13 @@ export default function Header({ theme, toggleTheme }) {
       <button
         data-testid="theme-toggle"
         className="p-2 rounded-full"
+        id="toggle"
         onClick={toggleTheme}
       >
         {theme === "dark" ? (
-          <HiSun className="w-8 h-8 mr-4" />
+          <HiSun data-testid="sun" className="w-8 h-8 mr-4" />
         ) : (
-          <HiMoon className="w-8 h-8 mr-4" />
+          <HiMoon data-testid="moon" className="w-8 h-8 mr-4" />
         )}
       </button>
     </header>
