@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiOutlineChevronLeft } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import LikeButton from "../components/LikeButton";
@@ -7,12 +7,12 @@ import Image from "next/image";
 
 function MainSection({
   images,
-  changeDate,
   likeImage,
   incrementDate,
   decrementDate,
   setLikeImage,
   imageDate,
+  showLeftChevron,
 }) {
   return (
     <main className="relative w-full h-auto font-titilluum">
@@ -39,15 +39,21 @@ function MainSection({
           </div>
           <section className="max-w-xl p-4">
             <div className="flex justify-between">
-              <GalleryButton
-                changeDate={incrementDate}
-                chevron={
-                  <HiOutlineChevronLeft
-                    title="previous image"
-                    className="w-8 h-8"
-                  />
-                }
-              />
+              {/* seems hacky but used a counter to conditionally render the left chevron,
+            to avoid the bugs when clicking it on initial render */}
+              {showLeftChevron > 0 ? (
+                <GalleryButton
+                  changeDate={incrementDate}
+                  chevron={
+                    <HiOutlineChevronLeft
+                      title="previous image"
+                      className="w-8 h-8"
+                    />
+                  }
+                />
+              ) : (
+                <div className="w-6 h-6"></div>
+              )}
               <h4 className="font-[700] text-2xl">{images.title}</h4>
               <GalleryButton
                 changeDate={decrementDate}
