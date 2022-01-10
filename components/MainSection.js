@@ -57,7 +57,7 @@ function MainSection({
               ) : (
                 <div className="w-6 h-6"></div>
               )}
-              <h4 className="font-[700] text-2xl">{images.title}</h4>
+              <h2 className="font-[700] text-2xl">{images.title}</h2>
               <GalleryButton
                 changeDate={decrementDate}
                 chevron={
@@ -69,9 +69,9 @@ function MainSection({
               />{" "}
             </div>
             <div className="flex items-center gap-4">
-              <h4 className="dark:text-gray-300 text-gray-500 font-[600] py-2">
+              <h3 className="dark:text-gray-300 text-gray-500 font-[600] py-2">
                 {imageDate}
-              </h4>
+              </h3>
               <LikeButton
                 likeImage={likeImage}
                 setLikeImage={() => setLikeImage(!likeImage)}
