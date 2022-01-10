@@ -19,6 +19,8 @@ function MainSection({
       {images && (
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center h-auto m-4 mt-2 rounded-md shadow-lg">
+            {/*APOD sometimes is actually a video, conditionally render an iframe 
+            instead of image to support them*/}
             {images.media_type === "image" ? (
               <Image
                 alt={images.title}
