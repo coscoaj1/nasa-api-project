@@ -5,6 +5,7 @@ import moment from "moment";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import MainSection from "../components/MainSection";
+import Footer from "../components/Footer";
 
 export const nasaUrl = "https://api.nasa.gov/planetary/apod?date=";
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showLeftChevron, setShowLeftChevron] = useState(0);
   const [likeImage, setLikeImage] = useState(false);
   const [date, setDate] = useState(() => {
     let initialDate = new moment();
@@ -59,12 +61,14 @@ export default function Home() {
     let today = date;
     let todayClone = today.clone().subtract(1, "day");
     setNewDate(todayClone);
+    setShowLeftChevron(showLeftChevron + 1);
   };
 
   const incrementDate = () => {
     let today = date;
     let todayClone = today.clone().add(1, "day");
     setNewDate(todayClone);
+    setShowLeftChevron(showLeftChevron - 1);
   };
 
   if (images) {
@@ -92,7 +96,9 @@ export default function Home() {
         incrementDate={incrementDate}
         decrementDate={decrementDate}
         imageDate={imageDate}
+        showLeftChevron={showLeftChevron}
       />
+      <Footer />
     </div>
   );
 }
