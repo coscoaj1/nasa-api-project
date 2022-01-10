@@ -4,8 +4,8 @@ import { HiSun } from "react-icons/hi";
 
 export default function Header({ theme, toggleTheme }) {
   return (
-    <nav className="relative flex w-full h-12 gap-4 items-center dark:bg-[#212121] bg-white">
-      <h1 className="pl-4 text-lg font-[500]">UnSpace</h1>
+    <header className="relative flex w-full h-12 gap-4 items-center dark:bg-[#212121] bg-white">
+      <h1 className="pl-4 text-lg font-[500]">My SpaceBook</h1>
       <button
         data-testid="theme-toggle"
         className="p-2 rounded-full"
@@ -17,6 +17,6 @@ export default function Header({ theme, toggleTheme }) {
           <HiMoon className="w-8 h-8" />
         )}
       </button>
-    </nav>
+    </header>
   );
 }
