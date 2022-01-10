@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import moment from "moment";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
 import LikeButton from "../components/LikeButton";
 import noVideo from "../public/assets/no_video.webp";
-import DecrementButton from "../components/DecrementButton";
-import IncrementButton from "../components/IncrementButton";
+import GalleryButton from "../components/GalleryButton";
+import { HiOutlineChevronLeft } from "react-icons/hi";
+import { HiOutlineChevronRight } from "react-icons/hi";
 export const nasaUrl = "https://api.nasa.gov/planetary/apod?date=";
 
 export default function Home() {
@@ -52,19 +53,22 @@ export default function Home() {
       });
   }, [date]);
 
-  const decrementDate = () => {
-    let today = date;
-    let todayClone = today.clone().subtract(1, "day");
+  const setNewDate = (todayClone) => {
     setDate(todayClone);
     setLikeImage(false);
     setLoading(true);
   };
+
+  const decrementDate = () => {
+    let today = date;
+    let todayClone = today.clone().subtract(1, "day");
+    setNewDate(todayClone);
+  };
+
   const incrementDate = () => {
     let today = date;
     let todayClone = today.clone().add(1, "day");
-    setDate(todayClone);
-    setLikeImage(false);
-    setLoading(true);
+    setNewDate(todayClone);
   };
 
   if (images) {
@@ -99,8 +103,7 @@ export default function Home() {
                 />
               ) : (
                 <iframe
-                  width={560}
-                  height={315}
+                  className="sm:w-[560px] w-[375px] h-[500px]"
                   src={images.url}
                   title="YouTube video player"
                   frameBorder={0}
@@ -110,9 +113,25 @@ export default function Home() {
             </div>
             <section className="max-w-xl p-4">
               <div className="flex justify-between">
-                <IncrementButton incrementDate={incrementDate} />
+                <GalleryButton
+                  changeDate={incrementDate}
+                  chevron={
+                    <HiOutlineChevronLeft
+                      title="previous image"
+                      className="w-8 h-8"
+                    />
+                  }
+                />
                 <h4 className="font-[700] text-2xl">{images.title}</h4>
-                <DecrementButton decrementDate={decrementDate} />
+                <GalleryButton
+                  changeDate={decrementDate}
+                  chevron={
+                    <HiOutlineChevronRight
+                      title="next image"
+                      className="w-8 h-8"
+                    />
+                  }
+                />{" "}
               </div>
               <div className="flex items-center gap-4">
                 <h4 className="dark:text-gray-300 text-gray-500 font-[600] py-2">
