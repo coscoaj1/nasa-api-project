@@ -11,6 +11,7 @@ export default function Header({ theme, toggleTheme }) {
         className="p-2 rounded-full"
         id="toggle"
         onClick={toggleTheme}
+        aria-label="dark/light mode toggle"
       >
         {theme === "dark" ? (
           <HiSun data-testid="sun" className="w-8 h-8 mr-4" />
