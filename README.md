@@ -10,7 +10,7 @@
 
 ## General info
 
-This is my project submission for my Shopify Frontend Engineer Internship Summer of 2022 application. 
+This is my project submission for my Shopify Frontend Engineer Internship Summer of 2022 application. Ran into a few gotchas of course, maily in that the APOD is sometimes a video :) However, not such a big deal. I made it work by conditionally rendering a youtube iframe if the media type was video.
 
 ## Technologies
 
@@ -24,7 +24,7 @@ Project is created with:
 
 ## Features
 
-* Carousel style image gallery that displays the Image of the day along with the date and description.
+* Carousel style image gallery that displays the image or video of the day along with the date and description.
 * Forward/back buttons to load the images/videos of previous days.
 * Mobile Responsive.
 * Option to toggle between dark and light mode.
