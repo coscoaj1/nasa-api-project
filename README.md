@@ -10,7 +10,7 @@
 
 ## General info
 
-This is my project submission for my Shopify Frontend Engineer Internship Summer of 2022 application. Ran into a few gotchas of course, maily in that the APOD is sometimes a video :) However, not such a big deal. I did make it work by conditionally rendering an iframe if the media type was video.
+This is my project submission for my Shopify Frontend Engineer Internship Summer of 2022 application. Ran into a few gotchas of course, maily in that the APOD is sometimes a video link :) However, not such a big deal. I did make it work by conditionally rendering an iframe if the media type was video.
 
 ## Technologies
 
@@ -30,6 +30,10 @@ Project is created with:
 * Option to toggle between dark and light mode.
 * Like/unlike button.
 * Spinning NASA logo for the loading state.
+
+## Room for improvement
+* Add a date picker to choose the start date
+* Add a button to share/tweet the photo.
 
 
 
