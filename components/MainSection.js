@@ -77,7 +77,7 @@ function MainSection({
                 setLikeImage={() => setLikeImage(!likeImage)}
               />
             </div>
-            <p className="text-gray-900 dark:text-gray-300 text-lg font-[400] text-center">
+            <p className="text-gray-900 dark:text-gray-300 text-lg font-[400] text-center mb-12">
               {images.explanation}
             </p>
           </section>
